@@ -5,6 +5,7 @@ public class RealNumberTester {
     boolean failure = false;
 
     failure = equalsTester() || failure;
+    failure = realNumberToRealNumberAddTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -37,6 +38,7 @@ public class RealNumberTester {
   }
 
   public static boolean equalsTester() {
+    testerMessage("equalsTester()");
     boolean failure = false;
 
     RealNumber a;
@@ -64,13 +66,55 @@ public class RealNumberTester {
       a = new RealNumber(vals[test][0]);
       b = new RealNumber(vals[test][1]);
       if (expectedEvals[test] == a.equals(b)) {
-        passMessage(test);
+        //System.out.println("a.equals(b)");
+        //passMessage(test);
       } else {
+        failure = true;
         System.out.println("a.equals(b)");
-        errorMessage(test, Boolean.toString(expectedEvals[test]), Boolean.toString(a.equals(b)));
+        errorMessage(test, Boolean.toString(expectedEvals[test]), Boolean.toString(b.equals(a)));
+      }
+      if (expectedEvals[test] == b.equals(a)) {
+        //System.out.println("b.equals(a)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("b.equals(a)");
+        errorMessage(test, Boolean.toString(expectedEvals[test]), Boolean.toString(b.equals(a)));
       }
     }
 
+    methodMessage("equals()", failure);
     return failure;
+  }
+
+  public static boolean realNumberToRealNumberAddTester(int tests) {
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      double a = Math.random();
+      double b = Math.random();
+      RealNumber expected = new RealNumber(a + b);
+      RealNumber a1 = new RealNumber(a);
+      RealNumber b1 = new RealNumber(b);
+      if (a1.add(b1).equals(expected)) {
+        //System.out.println("a1.add(b1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("a1.add(b1)");
+        errorMessage(test, (a + b) + "", a1.add(b1).toString());
+      }
+      if (b1.add(a1).equals(expected)) {
+        //System.out.println("b1.add(a1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("b1.add(a1)");
+        errorMessage(test, (a + b) + "", b1.add(a1).toString());
+      }
+    }
+
+    methodMessage("realNumberToRealNumberAddTester()", failure);
+    return false;
   }
 }
