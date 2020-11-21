@@ -1,16 +1,16 @@
 public class RealNumber{
   private double value;
 
-  public RealNumber(double v){
+  public RealNumber(double v) {
     value = v;
   }
 
-  public double getValue(){
+  public double getValue() {
     return value;
   }
 
-  public String toString(){
-    return ""+getValue();
+  public String toString() {
+    return "" + getValue();
   }
   //---------ONLY EDIT BELOW THIS LINE------------
 

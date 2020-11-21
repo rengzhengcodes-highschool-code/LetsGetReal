@@ -1,6 +1,5 @@
 public class RealNumberTester {
 
-
   public static void main(String[] args) {
     boolean failure = false;
 
