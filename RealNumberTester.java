@@ -6,6 +6,9 @@ public class RealNumberTester {
 
     failure = equalsTester() || failure;
     failure = realNumberToRealNumberAddTester(100) || failure;
+    failure = realNumberToRealNumberMultiplyTester(100) || failure;
+    failure = realNumberToRealNumberDivideTester(100) || failure;
+    failure = realNumberToRealNumberSubtractTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -88,6 +91,7 @@ public class RealNumberTester {
   }
 
   public static boolean realNumberToRealNumberAddTester(int tests) {
+    testerMessage("realNumberToRealNumberAddTester()");
     boolean failure = false;
 
     for (int test = 0; test < tests; test++) {
@@ -115,6 +119,104 @@ public class RealNumberTester {
     }
 
     methodMessage("realNumberToRealNumberAddTester()", failure);
+    return false;
+  }
+
+  public static boolean realNumberToRealNumberMultiplyTester(int tests) {
+    testerMessage("realNumberToRealNumberMultiplyTester()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      double a = Math.random();
+      double b = Math.random();
+      RealNumber expected = new RealNumber(a * b);
+      RealNumber a1 = new RealNumber(a);
+      RealNumber b1 = new RealNumber(b);
+      if (a1.multiply(b1).equals(expected)) {
+        //System.out.println("a1.multiply(b1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("a1.multiply(b1)");
+        errorMessage(test, (a * b) + "", a1.multiply(b1).toString());
+      }
+      if (b1.multiply(a1).equals(expected)) {
+        //System.out.println("b1.multiply(a1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("b1.multiply(a1)");
+        errorMessage(test, (a * b) + "", b1.multiply(a1).toString());
+      }
+    }
+
+    methodMessage("realNumberToRealNumberMultiplyTester()", failure);
+    return false;
+  }
+
+  public static boolean realNumberToRealNumberDivideTester(int tests) {
+    testerMessage("realNumberToRealNumberDivideTester()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      double a = Math.random();
+      double b = Math.random();
+      RealNumber expectedAOverB = new RealNumber(a / b);
+      RealNumber expectedBOverA = new RealNumber(b / a);
+      RealNumber a1 = new RealNumber(a);
+      RealNumber b1 = new RealNumber(b);
+      if (a1.divide(b1).equals(expectedAOverB)) {
+        //System.out.println("a1.divide(b1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("a1.divide(b1)");
+        errorMessage(test, (a / b) + "", a1.divide(b1).toString());
+      }
+      if (b1.divide(a1).equals(expectedBOverA)) {
+        //System.out.println("b1.divide(a1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("b1.divide(a1)");
+        errorMessage(test, (b / a) + "", b1.divide(a1).toString());
+      }
+    }
+
+    methodMessage("realNumberToRealNumberDivideTester()", failure);
+    return false;
+  }
+
+  public static boolean realNumberToRealNumberSubtractTester(int tests) {
+    testerMessage("realNumberToRealNumberSubtractTester()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      double a = Math.random();
+      double b = Math.random();
+      RealNumber expectedAMinusB = new RealNumber(a - b);
+      RealNumber expectedBMinusA = new RealNumber(b - a);
+      RealNumber a1 = new RealNumber(a);
+      RealNumber b1 = new RealNumber(b);
+      if (a1.subtract(b1).equals(expectedAMinusB)) {
+        //System.out.println("a1.subtract(b1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("a1.subtract(b1)");
+        errorMessage(test, (a - b) + "", a1.subtract(b1).toString());
+      }
+      if (b1.subtract(a1).equals(expectedBMinusA)) {
+        //System.out.println("b1.subtract(a1)");
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("b1.subtract(a1)");
+        errorMessage(test, (b - a) + "", b1.subtract(a1).toString());
+      }
+    }
+
+    methodMessage("realNumberToRealNumberSubtractTester()", failure);
     return false;
   }
 }
