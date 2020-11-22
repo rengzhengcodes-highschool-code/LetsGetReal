@@ -19,6 +19,7 @@ public class RationalNumber extends RealNumber {
       this.numerator = nume;
       this.denominator = deno;
     }
+    this.reduce();
   }
 
   public double getValue() {
@@ -67,7 +68,27 @@ public class RationalNumber extends RealNumber {
   private static int gcd(int a, int b) {
     /*use euclids method or a better one*/
     http://sites.math.rutgers.edu/~greenfie/gs2004/euclid.html
-    return 0;
+    if (a == 0 || b == 0) {
+      return 1;
+    }
+
+    a = Math.abs(a);
+    b = Math.abs(b);
+
+    if (a < b) {//Makes a the largest number
+      int c = b;
+      b = a;
+      a = c;
+    }
+
+    int remainder = a % b;
+    while (remainder != 0) {
+      a = b;
+      b = remainder;
+      remainder = a % b;
+    }
+
+    return b;
   }
 
   /**
@@ -76,7 +97,9 @@ public class RationalNumber extends RealNumber {
   *reduced after construction.
   */
   private void reduce() {
-
+    int gcd = gcd(this.numerator, this.denominator);
+    this.numerator = this.numerator / gcd;
+    this.denominator = this.denominator / gcd;
   }
   /******************Operations Return a new RationalNumber!!!!****************/
   /**

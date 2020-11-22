@@ -42,6 +42,30 @@ public class RationalNumberTester {
     return (int)Math.floor(Math.random() * (end - start)) + start;
   }
 
+  private static int gcd(int a, int b) {
+    if (a == 0 || b == 0) {
+      return 1;
+    }
+
+    a = Math.abs(a);
+    b = Math.abs(b);
+
+    if (a < b) {//Makes a the largest number
+      int c = b;
+      b = a;
+      a = c;
+    }
+
+    int remainder = a % b;
+    while (remainder != 0) {
+      a = b;
+      b = remainder;
+      remainder = a % b;
+    }
+
+    return b;
+  }
+
   public static boolean constructorValueTester(int tests) {
     testerMessage("constructorValue()");
     boolean failure = false;
@@ -68,6 +92,9 @@ public class RationalNumberTester {
     for (int test = 0; test < tests; test++) {
       int nume = randInt(1, 10000000);
       int deno = randInt(1, 10000000);
+      int gcd = gcd(nume, deno);
+      nume = nume / gcd;
+      deno = deno / gcd;
       RealNumber realVal = new RealNumber(nume / (double)deno);
       RationalNumber testVal = new RationalNumber(nume, deno);
       if (realVal.equals(testVal)) {
@@ -108,6 +135,9 @@ public class RationalNumberTester {
     for (int test = 0; test < tests; test++) {
       int nume = randInt(1, 10000000);
       int deno = randInt(1, 10000000);
+      int gcd = gcd(nume, deno);
+      nume = nume / gcd;
+      deno = deno / gcd;
       RealNumber realVal = new RealNumber(nume / (double)deno);
       RationalNumber testVal = new RationalNumber(nume, deno);
 
@@ -154,6 +184,7 @@ public class RationalNumberTester {
       }
     }
 
+    methodMessage("overZeroTester()", failure);
     return failure;
   }
 
@@ -188,6 +219,9 @@ public class RationalNumberTester {
     for (int test = 0; test < tests; test++) {
       int nume = randInt(1, 10000000);
       int deno = randInt(1, 10000000);
+      int gcd = gcd(nume, deno);
+      nume = nume / gcd;
+      deno = deno / gcd;
       RealNumber realVal = new RealNumber(deno / (double)nume);
       RationalNumber testVal = new RationalNumber(nume, deno).reciprocal();
 
@@ -204,7 +238,7 @@ public class RationalNumberTester {
       } else {
         failure = true;
         System.out.println("getNumerator() failure");
-        errorMessage(test, "" + deno, "" + testVal.getNumerator());
+        errorMessage(test, "" + deno, "" + testVal.getDenominator());
       }
 
       if (nume == testVal.getDenominator()) {
