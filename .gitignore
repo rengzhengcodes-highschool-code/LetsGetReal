@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#test cases that are not mine
+*TestCases.java
+
 # Log file
 *.log
 
