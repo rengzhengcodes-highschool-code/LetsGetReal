@@ -5,6 +5,8 @@ public class RationalNumberTester {
 
     failure = constructorValueTester(100) || failure;
     failure = getsTester(100) || failure;
+    failure = overZeroTester(100) || failure;
+    failure = reciprocalTester(100)  || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -62,6 +64,7 @@ public class RationalNumberTester {
       }
     }
 
+    System.out.println("\nRandom Time");
     for (int test = 0; test < tests; test++) {
       int nume = randInt(1, 10000000);
       int deno = randInt(1, 10000000);
@@ -101,6 +104,7 @@ public class RationalNumberTester {
       }
     }
 
+    System.out.println("\nRandom Time");
     for (int test = 0; test < tests; test++) {
       int nume = randInt(1, 10000000);
       int deno = randInt(1, 10000000);
@@ -136,21 +140,81 @@ public class RationalNumberTester {
     return failure;
   }
 
+  public static boolean overZeroTester(int tests) {
+    testerMessage("overZero Constructor");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      RationalNumber testVal = new RationalNumber(test, 0);
+      if (testVal.getNumerator() == 0 && testVal.getDenominator() == 1) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, "0/1", testVal.toString());
+      }
+    }
+
+    return failure;
+  }
+
   public static boolean reciprocalTester(int tests) {
     testerMessage("reciprocal()");
     boolean failure = false;
-    RationalNumber[] testValues = {
+    RationalNumber[] testVals = {
       new RationalNumber(0, 1),
       new RationalNumber(1, 0),
       new RationalNumber(-1, 0),
       new RationalNumber(2, 0),
       new RationalNumber(2, 0),
       new RationalNumber(0, 2),
-      new   RationalNumber(0, -2),
+      new RationalNumber(0, -2),
       new RationalNumber(0, -1),
       new RationalNumber(0, 1),
-
+      new RationalNumber(0, 0)
     };
+
+    System.out.println("Static barrage");
+
+    for (int test = 0; test < testVals.length; test++) {
+      if (testVals[test].getValue() == 0) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, "" + 0, "" + testVals[test].getValue());
+      }
+    }
+
+    System.out.println("\nRandom Time");
+    for (int test = 0; test < tests; test++) {
+      int nume = randInt(1, 10000000);
+      int deno = randInt(1, 10000000);
+      RealNumber realVal = new RealNumber(deno / (double)nume);
+      RationalNumber testVal = new RationalNumber(nume, deno).reciprocal();
+
+      if (realVal.getValue() == testVal.getValue()) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("getValue() failure");
+        errorMessage(test, "" + realVal.getValue(), "" + testVal.getValue());
+      }
+
+      if (deno == testVal.getNumerator()) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("getNumerator() failure");
+        errorMessage(test, "" + deno, "" + testVal.getNumerator());
+      }
+
+      if (nume == testVal.getDenominator()) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("getDenominator() failure");
+        errorMessage(test, "" + nume, "" + testVal.getNumerator());
+      }
+    }
 
 
     methodMessage("reciprocalTester()", failure);
