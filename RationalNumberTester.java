@@ -4,6 +4,7 @@ public class RationalNumberTester {
     boolean failure = false;
 
     failure = constructorValueTester(100) || failure;
+    failure = getsTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -74,6 +75,63 @@ public class RationalNumberTester {
     }
 
     methodMessage("constructorValueTester()", failure);
+    return failure;
+  }
+
+  public static boolean getsTester(int tests) {
+    testerMessage("getsTester()");
+    boolean failure = true;
+
+    RationalNumber[] testValues = {
+      new RationalNumber(0, 1),
+      new RationalNumber(1, 0),
+      new RationalNumber(-1, 0),
+      new RationalNumber(2, 0),
+      new RationalNumber(2, 0)
+    };
+
+    System.out.println("Static fire barrage.");
+    for (int test = 0; test < testValues.length; test++) {
+      if (testValues[test].getValue() == 0) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, "" + 0, "" + testValues[test].getValue());
+      }
+    }
+
+    for (int test = 0; test < tests; test++) {
+      int nume = randInt(1, 10000000);
+      int deno = randInt(1, 10000000);
+      RealNumber realVal = new RealNumber(nume / (double)deno);
+      RationalNumber testVal = new RationalNumber(nume, deno);
+
+      if (realVal.getValue() == testVal.getValue()) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("getValue() failure");
+        errorMessage(test, "" + realVal.getValue(), "" + testVal.getValue());
+      }
+
+      if (nume == testVal.getNumerator()) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("getNumerator() failure");
+        errorMessage(test, "" + nume, "" + testVal.getNumerator());
+      }
+
+      if (deno == testVal.getDenominator()) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        System.out.println("getDenominator() failure");
+        errorMessage(test, "" + deno, "" + testVal.getNumerator());
+      }
+    }
+
+    methodMessage("getsTester()", failure);
     return failure;
   }
 }
