@@ -9,6 +9,8 @@ public class RationalNumberTester {
     failure = reciprocalTester(100)  || failure;
     failure = reduceTester(100) || failure;
     failure = toStringTester(100) || failure;
+    failure = multiplyTester(100) || failure;
+    failure = divideTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -359,6 +361,50 @@ public class RationalNumberTester {
     }
 
     methodMessage("toStringTester()", failure);
+    return failure;
+  }
+
+  public static boolean multiplyTester(int tests) {
+    testerMessage("multiply()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      RationalNumber testVal = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber testVal1 = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber product = testVal.multiply(testVal1);
+      RationalNumber expected = new RationalNumber(testVal.getNumerator() * testVal1.getNumerator(),
+                                                  testVal.getDenominator() * testVal1.getDenominator());
+      if (expected.equals(product)) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, expected.toString(), product.toString());
+      }
+    }
+
+    methodMessage("multiplyTester()", failure);
+    return failure;
+  }
+
+  public static boolean divideTester(int tests) {
+    testerMessage("divide()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      RationalNumber testVal = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber testVal1 = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber quotient = testVal.divide(testVal1);
+      RationalNumber expected = new RationalNumber(testVal.getNumerator() * testVal1.getDenominator(),
+                                                  testVal.getDenominator() * testVal1.getNumerator());
+      if (expected.equals(quotient)) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, expected.toString(), quotient.toString());
+      }
+    }
+
+    methodMessage("divideTester()", failure);
     return failure;
   }
 }

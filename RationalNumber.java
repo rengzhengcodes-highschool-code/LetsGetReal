@@ -9,7 +9,7 @@ public class RationalNumber extends RealNumber {
   */
   public RationalNumber(int nume, int deno) {
     super(nume / (double)deno);
-    if (deno == 0) {
+    if (deno == 0 || nume == 0) {
       this.numerator = 0;
       this.denominator = 1;
     } else if (deno < 0) {
@@ -49,7 +49,7 @@ public class RationalNumber extends RealNumber {
   *@return true when the RationalNumbers have the same numerators and denominators, false otherwise.
   */
   public boolean equals(RationalNumber other) {
-    return false;
+    return (this.numerator == other.numerator && this.denominator == other.denominator);
   }
 
 
@@ -113,7 +113,7 @@ public class RationalNumber extends RealNumber {
   *Return a new RationalNumber that is the this divided by the other
   */
   public RationalNumber divide(RationalNumber other) {
-    return null;
+    return this.multiply(other.reciprocal());
   }
 
   /**
