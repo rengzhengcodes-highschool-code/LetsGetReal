@@ -106,7 +106,7 @@ public class RationalNumber extends RealNumber {
   *Return a new RationalNumber that is the product of this and the other
   */
   public RationalNumber multiply(RationalNumber other) {
-    return null;
+    return new RationalNumber(this.numerator * other.numerator, this.denominator * other.denominator);
   }
 
   /**
