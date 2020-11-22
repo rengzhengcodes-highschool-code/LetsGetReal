@@ -2,7 +2,11 @@ public class RealNumber{
   private double value;
 
   public RealNumber(double v) {
-    value = v;
+    if (v == Double.POSITIVE_INFINITY || v == Double.NEGATIVE_INFINITY) {
+      value = 0;
+    } else {
+      value = v;
+    }
   }
 
   public double getValue() {
