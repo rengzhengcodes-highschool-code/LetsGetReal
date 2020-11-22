@@ -12,6 +12,8 @@ public class RationalNumberTester {
     failure = toStringTester(100) || failure;
     failure = multiplyTester(100) || failure;
     failure = divideTester(100) || failure;
+    failure = addTester(100) || failure;
+    failure = subtractTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -437,6 +439,50 @@ public class RationalNumberTester {
     }
 
     methodMessage("divideTester()", failure);
+    return failure;
+  }
+
+  public static boolean addTester(int tests) {
+    testerMessage("add()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      RationalNumber testVal = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber testVal1 = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber sum = testVal.add(testVal1);
+      RationalNumber expected = new RationalNumber(testVal.getNumerator() * testVal1.getDenominator() + testVal1.getNumerator() * testVal.getDenominator(),
+                                                  testVal.getDenominator() * testVal1.getDenominator());
+      if (expected.equals(sum)) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, expected.toString(), sum.toString());
+      }
+    }
+
+    methodMessage("addTester()", failure);
+    return failure;
+  }
+
+  public static boolean subtractTester(int tests) {
+    testerMessage("subtract()");
+    boolean failure = false;
+
+    for (int test = 0; test < tests; test++) {
+      RationalNumber testVal = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber testVal1 = new RationalNumber(randInt(0, (int)Math.pow(2, 8)), randInt(1, (int)Math.pow(2, 8)));
+      RationalNumber difference= testVal.subtract(testVal1);
+      RationalNumber expected = new RationalNumber(testVal.getNumerator() * testVal1.getDenominator() - testVal1.getNumerator() * testVal.getDenominator(),
+                                                  testVal.getDenominator() * testVal1.getDenominator());
+      if (expected.equals(difference)) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, expected.toString(), difference.toString());
+      }
+    }
+
+    methodMessage("subtractTester()", failure);
     return failure;
   }
 }
