@@ -2,7 +2,7 @@ public class RealNumber{
   private double value;
 
   public RealNumber(double v) {
-    if (v == Double.POSITIVE_INFINITY || v == Double.NEGATIVE_INFINITY) {
+    if (Double.isInfinite(v) || Double.isNaN(v)) {
       value = 0;
     } else {
       value = v;

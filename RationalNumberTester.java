@@ -41,14 +41,15 @@ public class RationalNumberTester {
   }
 
   public static boolean constructorValueTester(int tests) {
-    testerMessage("constructorValueTester()");
+    testerMessage("constructorValue()");
     boolean failure = false;
     RationalNumber[] testValues = {
       new RationalNumber(0, 1),
       new RationalNumber(1, 0),
       new RationalNumber(-1, 0),
       new RationalNumber(2, 0),
-      new RationalNumber(2, 0)
+      new RationalNumber(-2, 0),
+      new RationalNumber(0, 0)
     };
 
     System.out.println("Static fire barrage.");
@@ -79,15 +80,15 @@ public class RationalNumberTester {
   }
 
   public static boolean getsTester(int tests) {
-    testerMessage("getsTester()");
-    boolean failure = true;
-
+    testerMessage("gets()");
+    boolean failure = false;
     RationalNumber[] testValues = {
       new RationalNumber(0, 1),
       new RationalNumber(1, 0),
       new RationalNumber(-1, 0),
       new RationalNumber(2, 0),
-      new RationalNumber(2, 0)
+      new RationalNumber(-2, 0),
+      new RationalNumber(0, 0)
     };
 
     System.out.println("Static fire barrage.");
@@ -132,6 +133,27 @@ public class RationalNumberTester {
     }
 
     methodMessage("getsTester()", failure);
+    return failure;
+  }
+
+  public static boolean reciprocalTester(int tests) {
+    testerMessage("reciprocal()");
+    boolean failure = false;
+    RationalNumber[] testValues = {
+      new RationalNumber(0, 1),
+      new RationalNumber(1, 0),
+      new RationalNumber(-1, 0),
+      new RationalNumber(2, 0),
+      new RationalNumber(2, 0),
+      new RationalNumber(0, 2),
+      new   RationalNumber(0, -2),
+      new RationalNumber(0, -1),
+      new RationalNumber(0, 1),
+
+    };
+
+
+    methodMessage("reciprocalTester()", failure);
     return failure;
   }
 }
