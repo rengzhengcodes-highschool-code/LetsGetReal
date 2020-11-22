@@ -8,6 +8,7 @@ public class RationalNumberTester {
     failure = overZeroTester(100) || failure;
     failure = reciprocalTester(100)  || failure;
     failure = reduceTester(100) || failure;
+    failure = equalsTester() || failure;
     failure = toStringTester(100) || failure;
     failure = multiplyTester(100) || failure;
     failure = divideTester(100) || failure;
@@ -337,6 +338,37 @@ public class RationalNumberTester {
     }
 
     methodMessage("reduceTester()", failure);
+    return failure;
+  }
+
+  public static boolean equalsTester() {
+    testerMessage("equals()");
+    boolean failure = false;
+    int[] primes = primes();
+    RationalNumber[][] testVals = {
+      {new RationalNumber(1, 2), new RationalNumber(2, 4)},
+      {new RationalNumber(3, 4), new RationalNumber(1, 4)},
+      {new RationalNumber(3, 8), new RationalNumber(3, 2)},
+      {new RationalNumber(0, 1), new RationalNumber(0,10000)},
+      {new RationalNumber(1, 0), new RationalNumber(2, 0)},
+      {new RationalNumber(1, 0), new RationalNumber(0, 1)}
+    };
+    boolean[] expected = {
+      true, false, false, true, true, true
+    };
+    int test = 0;
+    for (RationalNumber[] testVal : testVals) {
+      boolean output = testVal[0].equals(testVal[1]);
+      if (output == expected[test]) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, Boolean.toString(expected[test]), Boolean.toString(output));
+      }
+      test++;
+    }
+
+    methodMessage("equalsTester()", failure);
     return failure;
   }
 
