@@ -7,6 +7,7 @@ public class RationalNumberTester {
     failure = getsTester(100) || failure;
     failure = overZeroTester(100) || failure;
     failure = reciprocalTester(100)  || failure;
+    failure = reduceTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
@@ -252,6 +253,82 @@ public class RationalNumberTester {
 
 
     methodMessage("reciprocalTester()", failure);
+    return failure;
+  }
+
+  public static boolean reduceTester(int tests) {
+    testerMessage("reduce()");
+    boolean failure = false;
+    int[] primes = {
+      2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41,
+      43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
+      101, 103, 107, 109, 113, 127, 131, 137, 139,
+      149, 151, 157, 163, 167, 173, 179, 181, 191,
+      193, 197, 199
+    };
+
+    for (int test = 0; test < tests; test++) {
+      int nume = primes[randInt(0, primes.length)];
+      int deno;
+      do {//makes sure nume != deno
+        deno = primes[randInt(0, primes.length)];
+      } while (nume == deno);
+
+      int gcd = primes[randInt(0, primes.length)];
+      gcd = (int)Math.pow(gcd, randInt(1, 4));
+      //testing if it will reduce two primes not in common
+      RationalNumber testVal = new RationalNumber(nume, deno);
+      if (testVal.getNumerator() == nume && testVal.getDenominator() == deno) {
+        //passMessage(test);
+      } else {
+        System.out.println("Trying to reduce 2 primes");
+        failure = true;
+        errorMessage(test, nume + "/" + deno, testVal.toString());
+      }
+      //testing if it can reduce x/x to 1/1
+      testVal = new RationalNumber(nume, nume);
+      if (testVal.getNumerator() == 1 && testVal.getDenominator() == 1) {
+        //passMessage(test);
+      } else {
+        System.out.println("Can't reduce x/x to 1/1");
+        failure = true;
+        errorMessage(test, "1/1", testVal.toString());
+      }
+      //test with gcd in common
+      testVal = new RationalNumber(nume * gcd, deno * gcd);
+      if (testVal.getNumerator() == nume && testVal.getDenominator() == deno) {
+        //passMessage(test);
+      } else {
+        System.out.println("Can't reduce (x*y)/(y*z) to x/z");
+        failure = true;
+        errorMessage(test, nume + "/" + deno, testVal.toString());
+      }
+      //testing x/1
+      testVal = new RationalNumber(nume, 1);
+      if (testVal.getNumerator() == nume && testVal.getDenominator() == 1) {
+        //passMessage(test);
+      } else {
+        System.out.println("Trying to reduce out 1");
+        failure = true;
+        errorMessage(test, nume + "/1", testVal.toString());
+      }
+      //testing with gcd of multiple primes/relative primes
+      int factors = randInt(2, 3);
+      gcd = primes[randInt(0, primes.length)];
+      for (int factor = 1; factor <= factors; factor++) {
+        gcd *= primes[randInt(0, primes.length)];
+      }
+      testVal = new RationalNumber(nume * gcd, deno * gcd);
+      if (testVal.getNumerator() == nume && testVal.getDenominator() == deno) {
+        //passMessage(test);
+      } else {
+        System.out.println("Can't reduce (x*y)/(y*z) to x/z");
+        failure = true;
+        errorMessage(test, nume + "/" + deno, testVal.toString());
+      }
+    }
+
+    methodMessage("reduceTester()", failure);
     return failure;
   }
 }
