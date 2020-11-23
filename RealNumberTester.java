@@ -73,7 +73,7 @@ public class RealNumberTester {
       } else {
         failure = true;
         System.out.println("a.equals(b)");
-        errorMessage(test, Boolean.toString(expectedEvals[test]), Boolean.toString(b.equals(a)));
+        errorMessage(test, Boolean.toString(expectedEvals[test]), Boolean.toString(a.equals(b)));
       }
       if (expectedEvals[test] == b.equals(a)) {
         //System.out.println("b.equals(a)");
