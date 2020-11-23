@@ -8,7 +8,7 @@ public class RationalNumber extends RealNumber {
   *@param deno the denominator
   */
   public RationalNumber(int nume, int deno) {
-    super(nume / (double)deno);
+    super(0.0);
     if (deno == 0 || nume == 0) {
       this.numerator = 0;
       this.denominator = 1;
@@ -23,7 +23,7 @@ public class RationalNumber extends RealNumber {
   }
 
   public double getValue() {
-    return super.getValue();
+    return this.numerator / (double)this.denominator;
   }
 
   /**
