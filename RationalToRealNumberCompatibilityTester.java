@@ -3,7 +3,7 @@ public class RationalToRealNumberCompatibilityTester {
   public static void main(String[] args) {
     boolean failure = false;
 
-    failure = arithmeticTester(100) || failure;
+    //failure = arithmeticTester(100) || failure;
     failure = equalsTester(100) || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
@@ -96,7 +96,7 @@ public class RationalToRealNumberCompatibilityTester {
     return failure;
   }
 
-  public static boolean arithmeticTester(int tests) {
+  /*public static boolean arithmeticTester(int tests) {
     testerMessage("arithmetic");
     boolean failure = false;
 
@@ -193,5 +193,5 @@ public class RationalToRealNumberCompatibilityTester {
 
     methodMessage("arithmeticTester", failure);
     return failure;
-  }
+  }*/
 }
