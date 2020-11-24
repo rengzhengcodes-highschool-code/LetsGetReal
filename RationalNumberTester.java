@@ -394,6 +394,28 @@ public class RationalNumberTester {
       }
     }
 
+    for (int test = 0; test < tests; test++) {
+      int nume = 0;
+      int deno = randInt(1, 1000);
+      RationalNumber testVal = new RationalNumber(nume, deno);
+      if (testVal.toString().equals("0")) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, "0", testVal.toString());
+      }
+
+      nume = randInt(1, 1000);
+      deno = 1;
+      testVal = new RationalNumber(nume, deno);
+      if (testVal.toString().equals("" + nume)) {
+        //passMessage(test);
+      } else {
+        failure = true;
+        errorMessage(test, Integer.toString(nume), testVal.toString());
+      }
+    }
+
     methodMessage("toStringTester()", failure);
     return failure;
   }
